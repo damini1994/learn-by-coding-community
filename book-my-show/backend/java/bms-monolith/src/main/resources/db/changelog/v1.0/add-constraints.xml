@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <!-- Foreign Key Constraints for Event -->
+    <changeSet id="1-add-event-foreign-keys" author="damini">
+        <addForeignKeyConstraint baseTableName="event" baseColumnNames="vendor_id"
+                                 referencedTableName="vendor" referencedColumnNames="id"
+                                 constraintName="fk_event_vendor" />
+        <addForeignKeyConstraint baseTableName="event" baseColumnNames="venue_id"
+                                 referencedTableName="venue" referencedColumnNames="id"
+                                 constraintName="fk_event_venue" />
+        <addForeignKeyConstraint baseTableName="event" baseColumnNames="event_type_id"
+                                 referencedTableName="event_type" referencedColumnNames="id"
+                                 constraintName="fk_event_event_type" />
+    </changeSet>
+
+    <!-- Foreign Key Constraints for Event Show -->
+    <changeSet id="2-add-event-show-foreign-keys" author="damini">
+        <addForeignKeyConstraint baseTableName="event_show" baseColumnNames="event_id"
+                                 referencedTableName="event" referencedColumnNames="id"
+                                 constraintName="fk_event_show_event" />
+    </changeSet>
+
+    <!-- Foreign Key Constraints for Seat -->
+    <changeSet id="3-add-seat-foreign-keys" author="damini">
+        <addForeignKeyConstraint baseTableName="seat" baseColumnNames="seat_type_id"
+                                 referencedTableName="seat_type" referencedColumnNames="id"
+                                 constraintName="fk_seat_seat_type" />
+    </changeSet>
+
+    <!-- Foreign Key Constraints for Seat in Show -->
+    <changeSet id="4-add-seat-in-show-foreign-keys" author="damini">
+        <addForeignKeyConstraint baseTableName="seat_in_show" baseColumnNames="seat_type_in_show_id"
+                                 referencedTableName="seat_type_in_show" referencedColumnNames="id"
+                                 constraintName="fk_seat_in_show_seat_type_in_show" />
+        <addForeignKeyConstraint baseTableName="seat_in_show" baseColumnNames="show_id"
+                                 referencedTableName="event_show" referencedColumnNames="id"
+                                 constraintName="fk_seat_in_show_event_show" />
+    </changeSet>
+
+
+    <!-- Foreign Key Constraints for show genre -->
+    <changeSet id="5-add-venue-foreign-keys" author="damini">
+        <addForeignKeyConstraint baseTableName="show_genre"
+                                 baseColumnNames="show_id"
+                                 referencedTableName="event_show"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_show_genre_show_id"/>
+    </changeSet>
+
+    <!-- Primary Key Constraints -->
+    <changeSet id="1-add-primary-key-show-genre" author="damini">
+        <addPrimaryKey tableName="show_genre" columnNames="show_id, genre"/>
+    </changeSet>
+
+    <!-- Additional Constraints (Nullable, Unique, etc.) -->
+    <changeSet id="1-add-unique-constraint-venue-name" author="damini">
+        <addUniqueConstraint tableName="venue" columnNames="name" constraintName="uk_venue_name" />
+    </changeSet>
+
+
+    <changeSet id="2-add-not-null-constraint-event-title" author="damini">
+        <addNotNullConstraint tableName="event" columnName="title" columnDataType="VARCHAR(255)" />
+    </changeSet>
+
+    <changeSet id="3-add-not-null-constraint-seat-type" author="damini">
+        <addNotNullConstraint tableName="seat" columnName="seat_type_id" columnDataType="CHAR(36)" />
+    </changeSet>
+
+</databaseChangeLog>
