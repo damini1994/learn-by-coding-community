@@ -6,6 +6,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Venue extends BaseAuditingEntity {
 
+    @Column(nullable = false, unique = true)
     private String name;
     private String address;
     private BigDecimal latitude;

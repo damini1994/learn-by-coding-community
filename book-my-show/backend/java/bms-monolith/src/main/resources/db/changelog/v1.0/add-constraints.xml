@@ -6,68 +6,53 @@
 
     <!-- Foreign Key Constraints for Event -->
     <changeSet id="1-add-event-foreign-keys" author="damini">
-        <addForeignKeyConstraint baseTableName="event" baseColumnNames="vendor_id"
-                                 referencedTableName="vendor" referencedColumnNames="id"
-                                 constraintName="fk_event_vendor" />
-        <addForeignKeyConstraint baseTableName="event" baseColumnNames="venue_id"
+        <addForeignKeyConstraint baseTableName="events" baseColumnNames="vendor_id"
+                                 referencedTableName="vendors" referencedColumnNames="id"
+                                 constraintName="fk_events_vendor" />
+        <addForeignKeyConstraint baseTableName="events" baseColumnNames="venue_id"
                                  referencedTableName="venue" referencedColumnNames="id"
-                                 constraintName="fk_event_venue" />
-        <addForeignKeyConstraint baseTableName="event" baseColumnNames="event_type_id"
-                                 referencedTableName="event_type" referencedColumnNames="id"
-                                 constraintName="fk_event_event_type" />
+                                 constraintName="fk_events_venue" />
+        <addForeignKeyConstraint baseTableName="events" baseColumnNames="event_type_id"
+                                 referencedTableName="event_types" referencedColumnNames="id"
+                                 constraintName="fk_events_event_types" />
     </changeSet>
 
     <!-- Foreign Key Constraints for Event Show -->
     <changeSet id="2-add-event-show-foreign-keys" author="damini">
-        <addForeignKeyConstraint baseTableName="event_show" baseColumnNames="event_id"
-                                 referencedTableName="event" referencedColumnNames="id"
-                                 constraintName="fk_event_show_event" />
+        <addForeignKeyConstraint baseTableName="event_shows" baseColumnNames="event_id"
+                                 referencedTableName="events" referencedColumnNames="id"
+                                 constraintName="fk_event_shows_event" />
     </changeSet>
 
     <!-- Foreign Key Constraints for Seat -->
     <changeSet id="3-add-seat-foreign-keys" author="damini">
-        <addForeignKeyConstraint baseTableName="seat" baseColumnNames="seat_type_id"
-                                 referencedTableName="seat_type" referencedColumnNames="id"
-                                 constraintName="fk_seat_seat_type" />
+        <addForeignKeyConstraint baseTableName="seats" baseColumnNames="seat_type_id"
+                                 referencedTableName="seat_types" referencedColumnNames="id"
+                                 constraintName="fk_seats_seat_types" />
     </changeSet>
 
     <!-- Foreign Key Constraints for Seat in Show -->
     <changeSet id="4-add-seat-in-show-foreign-keys" author="damini">
         <addForeignKeyConstraint baseTableName="seat_in_show" baseColumnNames="seat_type_in_show_id"
-                                 referencedTableName="seat_type_in_show" referencedColumnNames="id"
-                                 constraintName="fk_seat_in_show_seat_type_in_show" />
+                                 referencedTableName="seat_type_in_shows" referencedColumnNames="id"
+                                 constraintName="fk_seat_in_show_seat_type_in_shows" />
         <addForeignKeyConstraint baseTableName="seat_in_show" baseColumnNames="show_id"
-                                 referencedTableName="event_show" referencedColumnNames="id"
-                                 constraintName="fk_seat_in_show_event_show" />
+                                 referencedTableName="event_shows" referencedColumnNames="id"
+                                 constraintName="fk_seat_in_show_event_shows" />
     </changeSet>
 
 
     <!-- Foreign Key Constraints for show genre -->
     <changeSet id="5-add-venue-foreign-keys" author="damini">
-        <addForeignKeyConstraint baseTableName="show_genre"
+        <addForeignKeyConstraint baseTableName="show_genres"
                                  baseColumnNames="show_id"
-                                 referencedTableName="event_show"
+                                 referencedTableName="event_shows"
                                  referencedColumnNames="id"
-                                 constraintName="fk_show_genre_show_id"/>
+                                 constraintName="fk_show_genres_show_id"/>
     </changeSet>
 
     <!-- Primary Key Constraints -->
     <changeSet id="1-add-primary-key-show-genre" author="damini">
-        <addPrimaryKey tableName="show_genre" columnNames="show_id, genre"/>
+        <addPrimaryKey tableName="show_genres" columnNames="show_id, label" />
     </changeSet>
-
-    <!-- Additional Constraints (Nullable, Unique, etc.) -->
-    <changeSet id="1-add-unique-constraint-venue-name" author="damini">
-        <addUniqueConstraint tableName="venue" columnNames="name" constraintName="uk_venue_name" />
-    </changeSet>
-
-
-    <changeSet id="2-add-not-null-constraint-event-title" author="damini">
-        <addNotNullConstraint tableName="event" columnName="title" columnDataType="VARCHAR(255)" />
-    </changeSet>
-
-    <changeSet id="3-add-not-null-constraint-seat-type" author="damini">
-        <addNotNullConstraint tableName="seat" columnName="seat_type_id" columnDataType="CHAR(36)" />
-    </changeSet>
-
 </databaseChangeLog>

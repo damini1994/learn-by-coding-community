@@ -1,6 +1,7 @@
 package org.lbcc.bms.bms_monolith.common.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
@@ -18,6 +19,7 @@ import java.time.Instant;
 import java.util.List;
 
 @Entity
+@Table(name = "events")
 @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
 @SuperBuilder
