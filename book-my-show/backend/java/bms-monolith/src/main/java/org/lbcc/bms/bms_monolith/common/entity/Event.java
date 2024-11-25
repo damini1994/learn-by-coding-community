@@ -25,7 +25,6 @@ import java.util.List;
 @SuperBuilder
 public class Event extends BaseAuditingEntity {
 
-    @Size(min=10, max=50, message = "Title must be between 10 and 50 characters.")
     @Column(nullable = false, length = 50)
     private String title;
 

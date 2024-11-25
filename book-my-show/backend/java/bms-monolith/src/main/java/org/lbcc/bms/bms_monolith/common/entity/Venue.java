@@ -1,6 +1,7 @@
 package org.lbcc.bms.bms_monolith.common.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.CascadeType;
@@ -20,6 +21,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
+@Table(name = "venues")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -40,7 +42,6 @@ public class Venue extends BaseAuditingEntity {
     private OperationalStatus operationalStatus;
 
     @OneToMany(mappedBy = "venue", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @NotNull(message = "Seats list cannot be null.")
-    @Size(min = 1, max = 100, message = "Seats list must contain between 1 and 100 seats.")
+    @Column(nullable = false)
     private List<Seat> seats;
 }

@@ -62,7 +62,7 @@
 
     <!-- Venue Table -->
     <changeSet id="3-create-venue" author="damini">
-        <createTable tableName="venue">
+        <createTable tableName="venues">
             <column name="id" type="CHAR(36)">
                 <constraints primaryKey="true" />
             </column>

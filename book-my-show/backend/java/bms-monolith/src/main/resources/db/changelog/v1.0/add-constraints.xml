@@ -10,8 +10,8 @@
                                  referencedTableName="vendors" referencedColumnNames="id"
                                  constraintName="fk_events_vendor" />
         <addForeignKeyConstraint baseTableName="events" baseColumnNames="venue_id"
-                                 referencedTableName="venue" referencedColumnNames="id"
-                                 constraintName="fk_events_venue" />
+                                 referencedTableName="venues" referencedColumnNames="id"
+                                 constraintName="fk_events_venues" />
         <addForeignKeyConstraint baseTableName="events" baseColumnNames="event_type_id"
                                  referencedTableName="event_types" referencedColumnNames="id"
                                  constraintName="fk_events_event_types" />
